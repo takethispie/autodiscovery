@@ -1,19 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 
 namespace DCmicroservice
 {
-    public class MicroServiceCore
+    public static class MicroServiceCore
     {
-        Dictionary<string,MicroServiceBus> MicroSBUS;
+        static Dictionary<string,MicroServiceBus> MicroSBUS = new Dictionary<string, MicroServiceBus>();
+        static List<Type> serviceNames = new List<Type>();
+        public static List<MicroService> services = new List<MicroService>();
 
-        public MicroServiceCore()
+        static MicroServiceCore()
         {
-            MicroSBUS = new Dictionary<string,MicroServiceBus>();
-            MicroSBUS.Add("Main",new MicroServiceBus("Main"));
+            MicroSBUS.Add("Main", new MicroServiceBus("Main"));
+        }
+
+        public static void Init(string @namespace, Assembly ass)
+        {
+            var q = from t in ass.GetTypes()
+                    where t.IsClass && t.Namespace == @namespace && t.BaseType == typeof(MicroService)
+                    select t;
+            q.ToList().ForEach(t => Console.WriteLine(t.Name));
+            serviceNames = q.ToList();
         }
     }
 }

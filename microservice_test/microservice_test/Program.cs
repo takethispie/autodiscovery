@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MicroService4Net;
+using DCmicroservice;
+using System.Reflection;
 
 
 namespace microservice_test
@@ -12,7 +13,9 @@ namespace microservice_test
     {
         static void Main(string[] args)
         {
-            
+            MicroServiceCore.Init(typeof(Program).Namespace, Assembly.GetExecutingAssembly());
+            Console.WriteLine("Press key to quit...");
+            Console.ReadKey();
         }
     }
 }

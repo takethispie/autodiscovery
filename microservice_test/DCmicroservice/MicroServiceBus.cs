@@ -13,7 +13,7 @@ namespace DCmicroservice
     {
         public MicroServiceBus(string name)
         {
-            Name = name;
+            Name = name; 
         }
 
         public string Name;

@@ -7,18 +7,39 @@ using System.Threading;
 
 namespace DCmicroservice
 {
-    public class MicroService
+    public abstract class MicroService
     {
 
         Thread thread;
 
-        public virtual string Name { get; set; }
+        /// <summary>
+        /// service name
+        /// </summary>
+        public string Name { get; set; }
 
-        public virtual byte Status { get; set; }
+        /// <summary>
+        /// value follow design implementation, can be used for anything
+        /// </summary>
+        public byte Status { get; set; }
 
-        public virtual short Id { get; set; }
+        /// <summary>
+        /// the Id of the service
+        /// </summary>
+        public short Id { get; set; }
 
-        //register bus to send data to
+        /// <summary>
+        /// value follow design implementation, can be used for anything
+        /// </summary>
+        public short type { get; set; }
+
+        /// <summary>
+        /// name of the bus to connect the service to
+        /// </summary>
+        public string busName { get; set; }
+
+        /// <summary>
+        /// register bus to send data to
+        /// </summary>
         public event MessageEvent send;
 
         public virtual void Init()
@@ -27,19 +48,13 @@ namespace DCmicroservice
         }
 
         //receive data
-        public virtual void OnMessageReceived(object sender, MessageReceivedEventArgs e)
-        {
+        public abstract void OnMessageReceived(object sender, MessageReceivedEventArgs e);
 
-        }
-
-        public virtual void run()
-        {
-
-        }
+        public abstract void run();
 
         public virtual void Shutdown()
         {
-
+            thread.Abort();
         }
     }
 }
