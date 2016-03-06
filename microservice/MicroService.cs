@@ -1,77 +1,82 @@
 ﻿using System;
 using System.Threading;
 
-namespace microservice
+namespace DustCatMicroService
 {
-	public class MicroService
-	{
-		public static short IdCount = 1;
+    public class MicroService
+    {
+        public static short IdCount = 1;
 
-		public short Id;
-		public short Type;
-		public string baseBusName;
-		Thread thread;
-		public bool StartServiceAtProgramStartup;
-		public bool canBeMultipleInstance;
-		public virtual event MessageEvent sendToBus;
+        public short Id;
+        public short Type;
+        public string baseBusName;
 
-		public MicroService ()
-		{
-			thread = new Thread(RunService);
-			baseBusName = "Main";
+        protected virtual Thread thread { get; set; }
 
-			//set unique ID
-			Id = MicroService.IdCount;
-			IdCount += 1;
-		}
+        public bool StartServiceAtProgramStartup;
+        public bool canBeMultipleInstance;
+        public bool started;
+        public virtual event MessageEvent sendToBus;
 
-		/// <summary>
-		/// Adds the bus to the sendToBus event.
-		/// </summary>
-		/// <param name="me">the delegate of the receiveFromService bus function</param>
-		public virtual void addSendToBus(MessageEvent me)
-		{
-			sendToBus += me;
-		}
+        public MicroService()
+        {
+            thread = new Thread(RunService);
+            baseBusName = "Main";
+            started = false;
+            //set unique ID
+            Id = MicroService.IdCount;
+            IdCount += 1;
+        }
 
-		/// <summary>
-		/// Receive rom sender the specified message in args.
-		/// </summary>
-		/// <param name="sender">Sender.</param>
-		/// <param name="args">Arguments.</param>
-		public virtual void receive(object sender, MicroServiceEventArgs args)
-		{
+        /// <summary>
+        /// Adds the bus to the sendToBus event.
+        /// </summary>
+        /// <param name="me">the delegate of the receiveFromService bus function</param>
+        public void addSendToBus(MessageEvent me)
+        {
+            sendToBus += me;
+        }
 
-		}
+        /// <summary>
+        /// Receive rom sender the specified message in args.
+        /// </summary>
+        /// <param name="sender">Sender.</param>
+        /// <param name="args">Arguments.</param>
+        public virtual void receive(object sender, MicroServiceEventArgs args)
+        {
 
-		/// <summary>
-		/// Inits the service.
-		/// </summary>
-		public virtual void InitService()
-		{
-			thread.Start();
-		}
+        }
 
-		/// <summary>
-		/// Runs the service.
-		/// function run in the thread 
-		/// beware of received data access
-		/// might some rework too
-		/// </summary>
-		public virtual void RunService()
-		{
-			Console.WriteLine("BASE");
-		}
+        /// <summary>
+        /// Inits the service.
+        /// </summary>
+        public virtual void InitService()
+        {
+            started = true;
+            thread.Start();
+        }
 
-		/// <summary>
-		/// Shutdowns the service.
-		/// need to use something cleaner
-		/// </summary>
-		public virtual void ShutdownService()
-		{
-			thread.Abort();
-		}
+        /// <summary>
+        /// Runs the service.
+        /// function run in the thread 
+        /// beware of received data access
+        /// might some rework too
+        /// </summary>
+        public virtual void RunService()
+        {
+            throw new Exception("Error Cannott run base class");
+        }
 
-	}
+        /// <summary>
+        /// Shutdowns the service.
+        /// need to use something cleaner
+        /// </summary>
+        public virtual void ShutdownService()
+        {
+            started = false;
+            thread.Abort();
+        }
+
+    }
 }
 

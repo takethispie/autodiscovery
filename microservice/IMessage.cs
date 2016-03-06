@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace microservice
+namespace DustCatMicroService
 {
 	public interface IMessage
 	{

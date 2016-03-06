@@ -1,7 +1,11 @@
 ﻿using System;
 
-namespace microservice
+namespace DustCatMicroService
 {
+	/// <summary>
+	/// Micro service event arguments.
+	/// used to transmitt messages between services
+	/// </summary>
 	public class MicroServiceEventArgs : EventArgs
 	{
 		public IMessage message;
