@@ -4,8 +4,8 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{022BBEC9-DBB4-4F78-9534-AAE9168E0D66}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>microservice</RootNamespace>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DustCatMicroService</RootNamespace>
     <AssemblyName>microservice</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -29,6 +29,9 @@
     <Externalconsole>true</Externalconsole>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Windows.Forms" />
@@ -36,7 +39,6 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IMessage.cs" />
     <Compile Include="MicroServiceCore.cs" />
@@ -44,10 +46,6 @@
     <Compile Include="MicroServiceEventArgs.cs" />
     <Compile Include="StandardMessage.cs" />
     <Compile Include="MicroService.cs" />
-    <Compile Include="ExampleService\DisplayService.cs" />
-    <Compile Include="ExampleService\ProcessService.cs" />
-    <Compile Include="ExampleService\InputService.cs" />
-    <Compile Include="ExampleService\FormService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

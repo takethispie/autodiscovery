@@ -64,7 +64,7 @@ namespace DustCatMicroService
         /// </summary>
         public virtual void RunService()
         {
-            throw new Exception("Error Cannott run base class");
+            throw new Exception("Error Cannot run base class");
         }
 
         /// <summary>

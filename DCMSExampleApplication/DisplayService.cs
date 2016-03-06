@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
+using DustCatMicroService;
 
-namespace DustCatMicroService
+namespace DCMSExampleApplication
 {
     public class DisplayService : MicroService
     {
@@ -10,7 +11,6 @@ namespace DustCatMicroService
         public DisplayService()
         {
             StartServiceAtProgramStartup = false;
-            baseBusName = "Main";
         }
 
         public override void receive(object sender, MicroServiceEventArgs args)

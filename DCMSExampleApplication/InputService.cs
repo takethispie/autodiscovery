@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
+using DustCatMicroService;
 
-namespace DustCatMicroService
+namespace DCMSExampleApplication
 {
     public class InputService : MicroService
     {
@@ -10,7 +11,6 @@ namespace DustCatMicroService
         public InputService()
         {
             StartServiceAtProgramStartup = true;
-            baseBusName = "Main";
         }
 
         public override void receive(object sender, MicroServiceEventArgs args)
@@ -22,17 +22,13 @@ namespace DustCatMicroService
         {
             if (started)
             {
-                Console.Write(">");
                 MicroServiceEventArgs ev = new MicroServiceEventArgs();
                 string cmd = "";
                 while (!cmd.StartsWith("stop"))
                 {
+                    Console.Write(">");
                     cmd = Console.ReadLine();
                     if (cmd.StartsWith("start"))
-                    {
-                        ev.message = new StandardMessage("START_SERV", cmd, "DisplayService", 0);
-                    }
-                    else if (cmd.StartsWith("servicestart"))
                     {
                         ev.message = new StandardMessage("START_SERV", cmd, cmd.Split(' ')[1], 0);
                     }

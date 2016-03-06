@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading;
+using DustCatMicroService;
 
-namespace DustCatMicroService
+namespace DCMSExampleApplication
 {
     public class ProcessService : MicroService
     {
@@ -12,7 +13,6 @@ namespace DustCatMicroService
         public ProcessService()
         {
             StartServiceAtProgramStartup = true;
-            baseBusName = "Main";
             e = new MicroServiceEventArgs();
         }
 
@@ -31,7 +31,8 @@ namespace DustCatMicroService
                     e.message = new StandardMessage("DISP_COMMAND", c.ToString(), "DisplayService", 1);
                     sendToBus(this, e);
                 }
-                else {
+                else
+                {
                     e.message = new StandardMessage("DISP_COMMAND", "Cant parse expression", "DisplayService", 1);
                     sendToBus(this, e);
                 }
