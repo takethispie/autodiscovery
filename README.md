@@ -1,8 +1,8 @@
 # localmicroservice
->this is in a very early developement state, there is not even a name for the library or a library format (the project actually produce an .exe not a DLL), use at your own risk !
+
 
 ###Summary
-localmicroservice is a library which implement a non-distributed microservice architecture, it is like a microservice architecture but running only within one program.
+loosely coupled class with auto discovery that act as executable nodes of a program, very old project 
 
 ###Features
 it has an auto discovery feature to detect any class wich inherit from MicroService so the Main function is really simple:
