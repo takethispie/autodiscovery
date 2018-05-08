@@ -1,4 +1,4 @@
-# localmicroservice
+# playground project with a lot of things that does not make much sense and tries to reinvent the wheel
 
 
 ###Summary
